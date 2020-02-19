@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/tab_game"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="경기" />
+
+    <item android:id="@+id/tab_record"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:icon="@drawable/icon_record"
+        android:title="기록" />
+    <item android:id="@+id/tab_option"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:icon="@drawable/icon_option"
+        android:title="옵션" />
+
+
+</menu>
