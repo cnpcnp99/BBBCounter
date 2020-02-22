@@ -4,8 +4,24 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="새 로 고 침"
+            android:textColor="@color/BLACK"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:background="@color/LIGHT_GRAY"
+            android:layout_margin="3dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="15"
+        android:layout_weight="9"
         android:orientation="horizontal">
         <TextView
             android:layout_width="match_parent"

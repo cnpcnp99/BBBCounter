@@ -2,21 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/tab_game"
-        app:showAsAction="always"
+    <item
+        android:id="@+id/tab_game"
         android:enabled="true"
-        android:title="경기" />
+        android:icon="@android:drawable/ic_media_play"
+        android:title="경기"
+        app:showAsAction="always" />
 
-    <item android:id="@+id/tab_record"
-        app:showAsAction="always"
+    <item
+        android:id="@+id/tab_record"
         android:enabled="true"
-        android:icon="@drawable/icon_record"
-        android:title="기록" />
-    <item android:id="@+id/tab_option"
-        app:showAsAction="always"
+        android:icon="@android:drawable/stat_notify_chat"
+        android:title="기록"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/tab_information"
         android:enabled="true"
-        android:icon="@drawable/icon_option"
-        android:title="옵션" />
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="정보"
+        app:showAsAction="always" />
 
 
 </menu>

@@ -12,7 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_game.*
 
-class FragmentGame : Fragment(){
+
+class FragmentGame : Fragment() {
     var count_strike: Int = 0
     var count_ball : Int = 0
     var count_out : Int = 0
@@ -24,34 +25,35 @@ class FragmentGame : Fragment(){
     var maxInning : Int = 0 // 최대 진행된 이닝을 의미
     var game : Boolean = true
 
-    var gameData = Array(20) {Array(20) {0} }
-    var gameData_total = Array(20) {Array(20) {0} }
-
-    lateinit var viewGroup : ViewGroup
+    var gameData = Array(20) {IntArray(20) {0} }
+    var gameData_total = Array(20) {IntArray(20) {0} }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewGroup = inflater!!.inflate(R.layout.fragment_game,container, false) as ViewGroup
 
-        //TODO : fragment 를 일반 액티비티처럼 live 로 동작시키는 방법을 모르겠음 찾을 것!
-//        setTeamName()       // 팀명 설정
-//        startOrEndGame()    // 경기 시작
-//        countCheck()        // 카운트 체크
-//        checkRHEB()         // 득점, 안타, 에러, 사사구 체크
-//        endInning()         // 이닝 종료
-//        revertInning()      // 되돌리기
-//        nextInning()        // 되돌리기 반대 버튼
+//        bundle!!.putInt("id",1234)
+//        bundle!!.putParcelableArray("key",gameData as Array<out Parcelable>)
+//        arguments = bundle
+        return inflater.inflate(R.layout.fragment_game,container, false)
+    }
 
-
-        return viewGroup
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setTeamName()       // 팀명 설정
+        startOrEndGame()    // 경기 시작
+        countCheck()        // 카운트 체크
+        checkRHEB()         // 득점, 안타, 에러, 사사구 체크
+        endInning()         // 이닝 종료
+        revertInning()      // 되돌리기
+        nextInning()        // 되돌리기 반대 버튼
     }
 
     // 게임 시작
     private fun startOrEndGame() {
-        button_startGame.setOnClickListener { view ->
+        button_startGame.setOnClickListener {
             chronometer.base = SystemClock.elapsedRealtime()
             chronometer.start()
 
@@ -109,7 +111,7 @@ class FragmentGame : Fragment(){
 
     // 팀명 설정
     private fun setTeamName(){
-        teamName_top.setOnClickListener { view->
+        teamName_top.setOnClickListener {
             var builder = AlertDialog.Builder(requireContext())
 
             builder.setView(layoutInflater.inflate(R.layout.team_name_dialog, null))
@@ -127,7 +129,7 @@ class FragmentGame : Fragment(){
 
             builder.show()
         }
-        teamName_bottom.setOnClickListener { view->
+        teamName_bottom.setOnClickListener {
             var builder = AlertDialog.Builder(requireContext())
 
             builder.setView(layoutInflater.inflate(R.layout.team_name_dialog, null))
@@ -148,7 +150,7 @@ class FragmentGame : Fragment(){
     }
     // 되돌리기
     private fun revertInning() {
-        previousInning.setOnClickListener { view ->
+        previousInning.setOnClickListener {
             nextInning.isEnabled = true
             nextInning.isClickable = true
 
@@ -219,7 +221,7 @@ class FragmentGame : Fragment(){
 
     // 다음 버튼(되돌리기 반대)
     private fun nextInning(){
-        nextInning.setOnClickListener { view ->
+        nextInning.setOnClickListener {
             if (maxInning <= inning ) {
                 //가장 최근까지 진행된 이후는 눌러도 아무 일도 일어나지 않음
             } else{
@@ -306,7 +308,7 @@ class FragmentGame : Fragment(){
 
     // 이닝 종료시 처리
     private fun endInning(){
-        button_endInning.setOnClickListener { view->
+        button_endInning.setOnClickListener {
             nextInning.isEnabled = true
             nextInning.isClickable = true
             scoreBox()
@@ -320,9 +322,9 @@ class FragmentGame : Fragment(){
 
     // 볼 체크
     private fun checkBall(){
-        button_B.setOnClickListener { view->
-            nextInning.isEnabled = false
-            nextInning.isClickable = false
+        button_B.setOnClickListener {
+            //nextInning.isEnabled = false
+            //nextInning.isClickable = false
 
             if(count_ball == 0){
                 count_ball++
@@ -340,9 +342,9 @@ class FragmentGame : Fragment(){
                 ball_3.setBackgroundResource(R.drawable.circle)
             }
         }
-        ball_1.setOnClickListener { view->
-            nextInning.isEnabled = false
-            nextInning.isClickable = false
+        ball_1.setOnClickListener {
+            //nextInning.isEnabled = false
+            //nextInning.isClickable = false
 
             if(count_ball == 0){
                 count_ball++
@@ -360,9 +362,9 @@ class FragmentGame : Fragment(){
                 ball_3.setBackgroundResource(R.drawable.circle)
             }
         }
-        ball_2.setOnClickListener { view->
-            nextInning.isEnabled = false
-            nextInning.isClickable = false
+        ball_2.setOnClickListener {
+            //nextInning.isEnabled = false
+            //nextInning.isClickable = false
 
             if(count_ball == 0){
                 count_ball++
@@ -380,9 +382,9 @@ class FragmentGame : Fragment(){
                 ball_3.setBackgroundResource(R.drawable.circle)
             }
         }
-        ball_3.setOnClickListener { view->
-            nextInning.isEnabled = false
-            nextInning.isClickable = false
+        ball_3.setOnClickListener {
+            //nextInning.isEnabled = false
+            //nextInning.isClickable = false
 
             if(count_ball == 0){
                 count_ball++
@@ -404,10 +406,10 @@ class FragmentGame : Fragment(){
 
     // 스트라이크 체크
     private fun checkStrike(){
-        nextInning.isEnabled = false
-        nextInning.isClickable = false
+        //nextInning.isEnabled = false
+        //nextInning.isClickable = false
 
-        button_S.setOnClickListener { view->
+        button_S.setOnClickListener {
             if(count_strike == 0){
                 count_strike++
                 strike_1.setBackgroundResource(R.drawable.circle_yellow)
@@ -422,7 +424,7 @@ class FragmentGame : Fragment(){
         }
 
 
-        strike_1.setOnClickListener { view->
+        strike_1.setOnClickListener {
             if(count_strike == 0){
                 count_strike++
                 strike_1.setBackgroundResource(R.drawable.circle_yellow)
@@ -436,7 +438,7 @@ class FragmentGame : Fragment(){
             }
         }
 
-        strike_2.setOnClickListener { view->
+        strike_2.setOnClickListener {
             if(count_strike == 0){
                 count_strike++
                 strike_1.setBackgroundResource(R.drawable.circle_yellow)
@@ -453,10 +455,10 @@ class FragmentGame : Fragment(){
 
     // 아웃 체크
     private fun checkOut(){
-        nextInning.isEnabled = false
-        nextInning.isClickable = false
+        //nextInning.isEnabled = false
+        //nextInning.isClickable = false
 
-        button_O.setOnClickListener { view->
+        button_O.setOnClickListener {
             if(count_out == 0){
                 count_out++
                 out_1.setBackgroundResource(R.drawable.circle_red)
@@ -469,7 +471,7 @@ class FragmentGame : Fragment(){
                 out_2.setBackgroundResource(R.drawable.circle)
             }
         }
-        out_1.setOnClickListener { view->
+        out_1.setOnClickListener {
             if(count_out == 0){
                 count_out++
                 out_1.setBackgroundResource(R.drawable.circle_red)
@@ -482,7 +484,7 @@ class FragmentGame : Fragment(){
                 out_2.setBackgroundResource(R.drawable.circle)
             }
         }
-        out_2.setOnClickListener { view->
+        out_2.setOnClickListener {
             if(count_out == 0){
                 count_out++
                 out_1.setBackgroundResource(R.drawable.circle_red)
@@ -499,15 +501,15 @@ class FragmentGame : Fragment(){
 
     // 안타 체크
     private fun checkHit(){
-        nextInning.isEnabled = false
-        nextInning.isClickable = false
+        //nextInning.isEnabled = false
+        //nextInning.isClickable = false
 
-        button_H_up.setOnClickListener { view ->
+        button_H_up.setOnClickListener {
             count_hit++
             text_hit.setText(count_hit.toString())
         }
 
-        button_H_down.setOnClickListener { view->
+        button_H_down.setOnClickListener {
             if(count_hit <= 0){
                 count_hit = 0
             }else
@@ -519,15 +521,15 @@ class FragmentGame : Fragment(){
 
     // 에러 체크
     private fun checkError(){
-        nextInning.isEnabled = false
-        nextInning.isClickable = false
+        //nextInning.isEnabled = false
+        //nextInning.isClickable = false
 
-        button_E_up.setOnClickListener { view ->
+        button_E_up.setOnClickListener {
             count_error++
             text_error.setText(count_error.toString())
         }
 
-        button_E_down.setOnClickListener { view->
+        button_E_down.setOnClickListener {
             if(count_error <= 0){
                 count_error = 0
             }else
@@ -539,15 +541,15 @@ class FragmentGame : Fragment(){
 
     // 볼넷 체크
     private fun checkBB(){
-        nextInning.isEnabled = false
-        nextInning.isClickable = false
+        //nextInning.isEnabled = false
+        //nextInning.isClickable = false
 
-        button_B_up.setOnClickListener { view ->
+        button_B_up.setOnClickListener {
             count_bb++
             text_bb.setText(count_bb.toString())
         }
 
-        button_B_down.setOnClickListener { view->
+        button_B_down.setOnClickListener {
             if(count_bb <= 0){
                 count_bb = 0
             }else
@@ -558,19 +560,19 @@ class FragmentGame : Fragment(){
     }
 
     // 득점 체크
-    private fun checkRun(){
-        nextInning.isEnabled = false
-        nextInning.isClickable = false
-
-        button_R_up.setOnClickListener { view ->
+    private fun checkRun() {
+        //nextInning.isEnabled = false
+        //nextInning.isClickable = false
+        button_R_up.setOnClickListener {
             count_run++
+
             text_run.setText(count_run.toString())
         }
 
-        button_R_down.setOnClickListener { view->
-            if(count_run <= 0){
+        button_R_down.setOnClickListener {
+            if (count_run <= 0) {
                 count_run = 0
-            }else
+            } else
                 count_run--
             text_run.setText(count_run.toString())
         }
@@ -663,6 +665,8 @@ class FragmentGame : Fragment(){
         count_error = 0
         count_bb = 0
     }
+
+
 
 
 }
